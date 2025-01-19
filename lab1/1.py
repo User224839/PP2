@@ -1,5 +1,8 @@
-b = "Hello, World!"
-print(b[2:5])
+a = "Hello, World!"
+print(a.upper())
 
-b = "Hello, World!"
-print(b[:5])
+a = "Hello, World!"
+print(a.lower())
+
+a = " Hello, World! "
+print(a.strip()) # returns "Hello, World!"
