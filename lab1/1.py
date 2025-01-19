@@ -1,1 +1,3 @@
-print(HELLO)
+import sys
+
+print(sys.version)
