@@ -1,7 +1,16 @@
-x = "John"
-# is the same as
-x = 'John'
+x, y, z = "Orange", "Banana", "Cherry"
+print(x)
+print(y)
+print(z)
 
-a = 4
-A = "Sally"
-#A will not overwrite a
+
+x = y = z = "Orange"
+print(x)
+print(y)
+print(z)
+
+fruits = ["apple", "banana", "cherry"]
+x, y, z = fruits
+print(x)
+print(y)
+print(z)
