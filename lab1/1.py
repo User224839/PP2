@@ -1,16 +1,9 @@
-x, y, z = "Orange", "Banana", "Cherry"
-print(x)
-print(y)
-print(z)
+x = "awesome"
 
+def myfunc():
+  x = "fantastic"
+  print("Python is " + x)
 
-x = y = z = "Orange"
-print(x)
-print(y)
-print(z)
+myfunc()
 
-fruits = ["apple", "banana", "cherry"]
-x, y, z = fruits
-print(x)
-print(y)
-print(z)
+print("Python is " + x)
