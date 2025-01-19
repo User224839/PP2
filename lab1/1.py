@@ -1,23 +1,15 @@
-x = 1
-y = 35656222554887711
-z = -3255522
+a = "Hello, World!"
+print(a[1])
 
-print(type(x))
-print(type(y))
-print(type(z))
+for x in "banana":
+  print(x)
 
-x = 1.10
-y = 1.0
-z = -35.59
+  a = "Hello, World!"
+print(len(a))
 
-print(type(x))
-print(type(y))
-print(type(z))
+txt = "The best things in life are free!"
+print("free" in txt)
 
-x = 3+5j
-y = 5j
-z = -5j
-
-print(type(x))
-print(type(y))
-print(type(z))
+txt = "The best things in life are free!"
+if "free" in txt:
+  print("Yes, 'free' is present.")
