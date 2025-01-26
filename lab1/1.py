@@ -1,15 +1,22 @@
-a = 330
-b = 330
-print("A") if a > b else print("=") if a == b else print("B")
+i = 1
+while i < 6:
+  print(i)
+  i += 1
 
-a = 200
-b = 33
-c = 500
-if a > b and c > a:
-  print("Both conditions are True")
+  i = 1
+while i < 6:
+  print(i)
+  if i == 3:
+    break
+  i += 1
 
-a = 200
-b = 33
-c = 500
-if a > b or a > c:
-  print("At least one of the conditions is True")
+
+for x in range(6):
+  print(x)
+else:
+  print("Finally finished!")
+
+for x in range(6):
+  print(x)
+else:
+  print("Finally finished!")
