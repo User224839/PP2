@@ -1,38 +1,15 @@
-thisdict = {
-  "brand": "Ford",
-  "electric": False,
-  "year": 1964,
-  "colors": ["red", "white", "blue"]
-}
+a = 330
+b = 330
+print("A") if a > b else print("=") if a == b else print("B")
 
+a = 200
+b = 33
+c = 500
+if a > b and c > a:
+  print("Both conditions are True")
 
-car = {
-"brand": "Ford",
-"model": "Mustang",
-"year": 1964
-}
-
-x = car.keys()
-
-print(x) #before the change
-
-car["color"] = "white"
-
-print(x) #after the change
-
-
-
-thisdict = {
-  "brand": "Ford",
-  "model": "Mustang",
-  "year": 1964
-}
-thisdict.update({"year": 2020})
-
-
-
-for x, obj in myfamily.items():
-  print(x)
-
-  for y in obj:
-    print(y + ':', obj[y])
+a = 200
+b = 33
+c = 500
+if a > b or a > c:
+  print("At least one of the conditions is True")
