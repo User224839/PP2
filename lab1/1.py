@@ -1,10 +1,15 @@
-age = 36
-txt = f"My name is John, I am {age}"
-print(txt)
+bool(False)
+bool(None)
+bool(0)
+bool("")
+bool(())
+bool([])
+bool({})
 
-price = 59
-txt = f"The price is {price} dollars"
-print(txt) 
+def myFunction() :
+  return True
 
-txt = f"The price is {20 * 59} dollars"
-print(txt)
+if myFunction():
+  print("YES!")
+else:
+  print("NO!")
