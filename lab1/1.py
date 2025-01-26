@@ -1,11 +1,11 @@
-thistuple = ("apple",)
-print(type(thistuple))
+#True and 1 is considered the same value:
+thisset = {"apple", "banana", "cherry", True, 1, 2}
+print(thisset)
 
-#NOT a tuple
-thistuple = ("apple")
-print(type(thistuple))
+set1 = {"a", "b", "c"}
+set2 = {1, 2, 3}
+set3 = {"John", "Elena"}
+set4 = {"apple", "bananas", "cherry"}
 
-thistuple = ("apple", "banana", "cherry")
-y = list(thistuple)
-y.remove("apple")
-thistuple = tuple(y)
+myset = set1.union(set2, set3, set4)
+print(myset)
