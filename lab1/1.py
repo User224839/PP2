@@ -1,11 +1,38 @@
-#True and 1 is considered the same value:
-thisset = {"apple", "banana", "cherry", True, 1, 2}
-print(thisset)
+thisdict = {
+  "brand": "Ford",
+  "electric": False,
+  "year": 1964,
+  "colors": ["red", "white", "blue"]
+}
 
-set1 = {"a", "b", "c"}
-set2 = {1, 2, 3}
-set3 = {"John", "Elena"}
-set4 = {"apple", "bananas", "cherry"}
 
-myset = set1.union(set2, set3, set4)
-print(myset)
+car = {
+"brand": "Ford",
+"model": "Mustang",
+"year": 1964
+}
+
+x = car.keys()
+
+print(x) #before the change
+
+car["color"] = "white"
+
+print(x) #after the change
+
+
+
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+thisdict.update({"year": 2020})
+
+
+
+for x, obj in myfamily.items():
+  print(x)
+
+  for y in obj:
+    print(y + ':', obj[y])
