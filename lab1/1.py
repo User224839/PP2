@@ -1,22 +1,17 @@
-i = 1
-while i < 6:
-  print(i)
-  i += 1
+def myfunc(n):
+  return lambda a : a * n
 
-  i = 1
-while i < 6:
-  print(i)
-  if i == 3:
-    break
-  i += 1
+mydoubler = myfunc(2)
+
+print(mydoubler(11))
 
 
-for x in range(6):
-  print(x)
-else:
-  print("Finally finished!")
+#using vriety of func in one place
+def myfunc(n):
+  return lambda a : a * n
 
-for x in range(6):
-  print(x)
-else:
-  print("Finally finished!")
+mydoubler = myfunc(2)
+mytripler = myfunc(3)
+
+print(mydoubler(11))
+print(mytripler(11))
