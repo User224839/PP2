@@ -21,5 +21,7 @@ class Time:
             if self.minutes < 0:
                 self.minutes = 59
                 self.hours = (self.hours - 1) % 24
+a=int(input())
+b=int(input())
+c=int(input())
 print(Time)
-
