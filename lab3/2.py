@@ -1,14 +1,14 @@
-def has_33(nums):
-    return any(nums[i] == nums[i+1] == 3 for i in range(len(nums)-1))
+def unique_elements(lst):
+    unique_list = []
+    for item in lst:
+        if item not in unique_list:
+            unique_list.append(item)
+    return unique_list
 
-def spy_game(nums):
-    code = [0, 0, 7]
-    for num in nums:
-        if num == code[0]:
-            code.pop(0)
-        if not code:
-            return True
-    return False
+def is_palindrome(s):
+    s = s.replace(" ", "").lower()
+    return s == s[::-1]
 
-def sphere_volume(radius):
-    return (4/3) * 3.141592653589793 * (radius ** 3)
+def histogram(lst):
+    for num in lst:
+        print("*" * num)
