@@ -1,19 +1,14 @@
-import random
-import itertools
+def has_33(nums):
+    return any(nums[i] == nums[i+1] == 3 for i in range(len(nums)-1))
 
+def spy_game(nums):
+    code = [0, 0, 7]
+    for num in nums:
+        if num == code[0]:
+            code.pop(0)
+        if not code:
+            return True
+    return False
 
-def filter_prime(numbers):
-    def is_prime(n):
-        if n < 2:
-            return False
-        for i in range(2, int(n ** 0.5) + 1):
-            if n % i == 0:
-                return False
-        return True
-    return list(filter(is_prime, numbers))
-
-def string_permutations(s):
-    return list(map("".join, itertools.permutations(s)))
-
-def reverse_words(sentence):
-    return " ".join(sentence.split()[::-1])
+def sphere_volume(radius):
+    return (4/3) * 3.141592653589793 * (radius ** 3)
