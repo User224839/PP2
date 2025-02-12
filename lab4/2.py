@@ -1,20 +1,14 @@
-class Shape:
-    def area(self):
-        return 0
-
-
-class Square(Shape):
-    def __init__(self, length):
-        self.length = length
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
     
-    def area(self):
-        return self.length ** 2
-
-
-class Rectangle(Shape):
-    def __init__(self, length, width):
-        self.length = length
-        self.width = width
+    def show(self):
+        print(f"Point({self.x}, {self.y})")
     
-    def area(self):
-        return self.length * self.width
+    def move(self, new_x, new_y):
+        self.x = new_x
+        self.y = new_y
+    
+    def dist(self, other_point):
+        return ((self.x - other_point.x) ** 2 + (self.y - other_point.y) ** 2) ** 0.5
