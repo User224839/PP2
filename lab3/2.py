@@ -1,13 +1,15 @@
-# Function to filter prime numbers
-def is_prime(n):
-    if n < 2:
-        return False
-    for i in range(2, int(n ** 0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
+import random
+import itertools
 
+def grams_to_ounces(grams):
+    return 28.3495231 * grams
 
-numbers = [10, 15, 3, 7, 19, 23, 28]
-prime_numbers = list(filter(lambda x: is_prime(x), numbers))
-print("Prime numbers:", prime_numbers)
+def fahrenheit_to_celsius(fahrenheit):
+    return (5 / 9) * (fahrenheit - 32)
+
+def solve(numheads, numlegs):
+    for chickens in range(numheads + 1):
+        rabbits = numheads - chickens
+        if (chickens * 2 + rabbits * 4) == numlegs:
+            return chickens, rabbits
+    return None
