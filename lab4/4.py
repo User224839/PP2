@@ -1,13 +1,11 @@
-import math
-
-def regular_polygon_area(n, side_length):
-    return (n * side_length ** 2) / (4 * math.tan(math.pi / n))
+def parallelogram_area(base, height):
+    return base * height
 
 # Example usage
-n = 4  # Number of sides
-side_length = 25
-area = regular_polygon_area(n, side_length)
+base = 5
+height = 6
+area = parallelogram_area(base, height)
 
-print(f"Input number of sides: {n}")
-print(f"Input the length of a side: {side_length}")
-print(f"The area of the polygon is: {area:.2f}")
+print(f"Length of base: {base}")
+print(f"Height of parallelogram: {height}")
+print(f"Expected Output: {area:.1f}")
