@@ -1,7 +1,8 @@
 from datetime import datetime
 
-now = datetime.now()
-now_without_microseconds = now.replace(microsecond=0)
+date1 = datetime(2024, 2, 10, 14, 30, 0)  # Example date
+date2 = datetime(2024, 2, 14, 18, 15, 0)  # Another example date
 
-print("Original Datetime:", now)
-print("Datetime without Microseconds:", now_without_microseconds)
+difference = abs((date2 - date1).total_seconds())
+
+print("Difference in seconds:", difference)
