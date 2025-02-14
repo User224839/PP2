@@ -1,10 +1,13 @@
-import math
-
-def degree_to_radian(degree):
-    return degree * (math.pi / 180)
+def trapezoid_area(height, base1, base2):
+    return 0.5 * (base1 + base2) * height
 
 # Example usage
-degree = 15
-radian = degree_to_radian(degree)
-print(f"Input degree: {degree}")
-print(f"Output radian: {radian:.6f}")
+height = 5
+base1 = 5
+base2 = 6
+area = trapezoid_area(height, base1, base2)
+
+print(f"Height: {height}")
+print(f"Base, first value: {base1}")
+print(f"Base, second value: {base2}")
+print(f"Expected Output: {area}")
