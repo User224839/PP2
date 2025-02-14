@@ -1,9 +1,7 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
-today = datetime.now()
-yesterday = today - timedelta(days=1)
-tomorrow = today + timedelta(days=1)
+now = datetime.now()
+now_without_microseconds = now.replace(microsecond=0)
 
-print("Yesterday:", yesterday.strftime("%Y-%m-%d"))
-print("Today:", today.strftime("%Y-%m-%d"))
-print("Tomorrow:", tomorrow.strftime("%Y-%m-%d"))
+print("Original Datetime:", now)
+print("Datetime without Microseconds:", now_without_microseconds)
