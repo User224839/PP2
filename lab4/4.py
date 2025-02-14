@@ -1,8 +1,8 @@
-from datetime import datetime
+def square_generator(N):
+    for i in range(N + 1):
+        yield i ** 2
 
-date1 = datetime(2024, 2, 10, 14, 30, 0)  # Example date
-date2 = datetime(2024, 2, 14, 18, 15, 0)  # Another example date
-
-difference = abs((date2 - date1).total_seconds())
-
-print("Difference in seconds:", difference)
+# Example usage
+N = 10
+for square in square_generator(N):
+    print(square, end=" ")
