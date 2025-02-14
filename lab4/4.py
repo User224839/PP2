@@ -1,9 +1,8 @@
-def divisible_by_3_and_4(n):
-    for i in range(n + 1):
-        if i % 3 == 0 and i % 4 == 0:
-            yield i
+def squares(a, b):
+    for i in range(a, b + 1):
+        yield i ** 2
 
 # Example usage
-n = 50
-for num in divisible_by_3_and_4(n):
-    print(num, end=" ")
+a, b = 3, 8
+for square in squares(a, b):
+    print(square)
