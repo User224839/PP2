@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
 
-current_date = datetime.now()
-new_date = current_date - timedelta(days=5)
+today = datetime.now()
+yesterday = today - timedelta(days=1)
+tomorrow = today + timedelta(days=1)
 
-print("Current Date:", current_date.strftime("%Y-%m-%d"))
-print("Date after subtracting 5 days:", new_date.strftime("%Y-%m-%d"))
+print("Yesterday:", yesterday.strftime("%Y-%m-%d"))
+print("Today:", today.strftime("%Y-%m-%d"))
+print("Tomorrow:", tomorrow.strftime("%Y-%m-%d"))
