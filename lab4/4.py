@@ -1,8 +1,8 @@
-def squares(a, b):
-    for i in range(a, b + 1):
-        yield i ** 2
+def countdown(n):
+    for i in range(n, -1, -1):
+        yield i
 
 # Example usage
-a, b = 3, 8
-for square in squares(a, b):
-    print(square)
+n = 10
+for num in countdown(n):
+    print(num, end=" ")
