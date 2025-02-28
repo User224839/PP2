@@ -6,7 +6,7 @@ def read_file():
 
 data = read_file()
 
-def find_uppercase_followed_by_lowercase():
-    return re.findall(r'[A-Z][a-z]+', data)
+def match_a_followed_by_anything_ending_in_b():
+    return re.findall(r'a.*b', data)
 
-print(find_uppercase_followed_by_lowercase())
+print(match_a_followed_by_anything_ending_in_b())
