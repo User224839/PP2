@@ -6,7 +6,7 @@ def read_file():
 
 data = read_file()
 
-def replace_spaces_commas_dots():
-    return re.sub(r'[ ,.]', ':', data)
+def snake_to_camel():
+    return re.sub(r'_(.)', lambda m: m.group(1).upper(), data)
 
-print(replace_spaces_commas_dots())
+print(snake_to_camel())
