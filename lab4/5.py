@@ -6,7 +6,7 @@ def read_file():
 
 data = read_file()
 
-def split_at_uppercase():
-    return re.split(r'(?=[A-Z])', data)
+def insert_spaces_in_camel_case():
+    return re.sub(r'(?<!^)(?=[A-Z])', ' ', data)
 
-print(split_at_uppercase())
+print(insert_spaces_in_camel_case())
