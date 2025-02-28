@@ -1,7 +1,7 @@
 import re
 
-def find_uppercase_followed_by_lowercase(string):
-    return re.findall(r'[A-Z][a-z]+', string)
+def match_a_followed_by_anything_ending_in_b(string):
+    return re.fullmatch(r'a.*b', string) is not None
 
 # Example usage:
-print(find_uppercase_followed_by_lowercase("Hello World Test String"))
+print(match_a_followed_by_anything_ending_in_b("axxxb"))  # True
