@@ -1,7 +1,7 @@
 import re
 
-def split_at_uppercase(string):
-    return re.split(r'(?=[A-Z])', string)
+def insert_spaces_in_camel_case(string):
+    return re.sub(r'(?<!^)(?=[A-Z])', ' ', string)
 
 # Example usage:
-print(split_at_uppercase("HelloWorldTest"))  # ['Hello', 'World', 'Test']
+print(insert_spaces_in_camel_case("HelloWorldTest"))  # "Hello World Test"
