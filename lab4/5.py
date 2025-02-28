@@ -1,7 +1,7 @@
 import re
 
-def replace_spaces_commas_dots(string):
-    return re.sub(r'[ ,.]', ':', string)
+def snake_to_camel(string):
+    return ''.join(word.capitalize() for word in string.split('_'))
 
 # Example usage:
-print(replace_spaces_commas_dots("Hello, world. Test string"))  # "Hello:world:Test:string"
+print(snake_to_camel("hello_world_test"))  # "HelloWorldTest"
