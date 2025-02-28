@@ -6,7 +6,7 @@ def read_file():
 
 data = read_file()
 
-def snake_to_camel():
-    return re.sub(r'_(.)', lambda m: m.group(1).upper(), data)
+def split_at_uppercase():
+    return re.split(r'(?=[A-Z])', data)
 
-print(snake_to_camel())
+print(split_at_uppercase())
