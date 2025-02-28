@@ -10,3 +10,4 @@ radian = degree * (math.pi / 180)
 
 print(f"Delay in degrees: {degree}")
 print(f"Converted to radians: {radian:.6f}")
+    
