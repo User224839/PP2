@@ -6,7 +6,7 @@ def read_file():
 
 data = read_file()
 
-def insert_spaces_in_camel_case():
-    return re.sub(r'(?<!^)(?=[A-Z])', ' ', data)
+def camel_to_snake():
+    return re.sub(r'(?<!^)(?=[A-Z])', '_', data).lower()
 
-print(insert_spaces_in_camel_case())
+print(camel_to_snake())
