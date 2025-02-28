@@ -6,7 +6,7 @@ def read_file():
 
 data = read_file()
 
-def match_a_followed_by_anything_ending_in_b():
-    return re.findall(r'a.*b', data)
+def replace_spaces_commas_dots():
+    return re.sub(r'[ ,.]', ':', data)
 
-print(match_a_followed_by_anything_ending_in_b())
+print(replace_spaces_commas_dots())
