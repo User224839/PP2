@@ -1,6 +1,11 @@
 import re
-def camel_to_snake(string):
-    return re.sub(r'(?<!^)(?=[A-Z])', '_', string).lower()
 
-# Example usage:
-print(camel_to_snake("HelloWorldTest"))  # "hello_world_test"
+def read_file():
+    with open('row.txt', 'r', encoding='utf-8') as file:
+        return file.read()
+
+data = read_file()
+def match_a_followed_by_b():
+    return re.findall(r'a*b*', data)
+
+print(match_a_followed_by_b())
