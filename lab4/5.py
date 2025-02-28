@@ -1,7 +1,7 @@
 import re
 
-def match_a_followed_by_anything_ending_in_b(string):
-    return re.fullmatch(r'a.*b', string) is not None
+def replace_spaces_commas_dots(string):
+    return re.sub(r'[ ,.]', ':', string)
 
 # Example usage:
-print(match_a_followed_by_anything_ending_in_b("axxxb"))  # True
+print(replace_spaces_commas_dots("Hello, world. Test string"))  # "Hello:world:Test:string"
