@@ -6,7 +6,7 @@ def read_file():
 
 data = read_file()
 
-def find_lowercase_with_underscore():
-    return re.findall(r'\b[a-z]+_[a-z]+\b', data)
+def find_uppercase_followed_by_lowercase():
+    return re.findall(r'[A-Z][a-z]+', data)
 
-print(find_lowercase_with_underscore())
+print(find_uppercase_followed_by_lowercase())
