@@ -1,7 +1,7 @@
 import re
 
-def find_lowercase_with_underscore(string):
-    return re.findall(r'\b[a-z]+_[a-z]+\b', string)
+def find_uppercase_followed_by_lowercase(string):
+    return re.findall(r'[A-Z][a-z]+', string)
 
 # Example usage:
-print(find_lowercase_with_underscore("hello_world example_text another_test"))
+print(find_uppercase_followed_by_lowercase("Hello World Test String"))
