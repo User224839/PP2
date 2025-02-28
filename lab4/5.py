@@ -1,7 +1,7 @@
 import re
 
-def snake_to_camel(string):
-    return ''.join(word.capitalize() for word in string.split('_'))
+def split_at_uppercase(string):
+    return re.split(r'(?=[A-Z])', string)
 
 # Example usage:
-print(snake_to_camel("hello_world_test"))  # "HelloWorldTest"
+print(split_at_uppercase("HelloWorldTest"))  # ['Hello', 'World', 'Test']
