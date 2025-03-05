@@ -2,11 +2,10 @@ from functools import reduce
 import time
 import math
 
-def is_palindrome(s):
-    return s == s[::-1]
+def delayed_sqrt(number, delay_ms):
+    time.sleep(delay_ms / 1000)
+    return f"Square root of {number} after {delay_ms} milliseconds is {math.sqrt(number)}"
 
-word = "madam"
-print(f"Is '{word}' a palindrome? {is_palindrome(word)}") 
-
-word2 = "hello"
-print(f"Is '{word2}' a palindrome? {is_palindrome(word2)}") 
+number = 25100
+delay = 2123
+print(delayed_sqrt(number, delay)) 
