@@ -2,10 +2,11 @@ from functools import reduce
 import time
 import math
 
-def delayed_sqrt(number, delay_ms):
-    time.sleep(delay_ms / 1000)
-    return f"Square root of {number} after {delay_ms} milliseconds is {math.sqrt(number)}"
+def all_true(tpl):
+    return all(tpl)
 
-number = 25100
-delay = 2123
-print(delayed_sqrt(number, delay)) 
+tpl1 = (True, True, True)
+tpl2 = (True, False, True)
+
+print(f"Are all elements in {tpl1} true? {all_true(tpl1)}")  
+print(f"Are all elements in {tpl2} true? {all_true(tpl2)}")  
