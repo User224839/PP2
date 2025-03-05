@@ -2,10 +2,11 @@ from functools import reduce
 import time
 import math
 
-def count_case(s):
-    upper = sum(1 for c in s if c.isupper())
-    lower = sum(1 for c in s if c.islower())
-    return {"Uppercase": upper, "Lowercase": lower}
+def is_palindrome(s):
+    return s == s[::-1]
 
-text = "Hello World!"
-print(f"Upper and lower case count in '{text}': {count_case(text)}") 
+word = "madam"
+print(f"Is '{word}' a palindrome? {is_palindrome(word)}") 
+
+word2 = "hello"
+print(f"Is '{word2}' a palindrome? {is_palindrome(word2)}") 
