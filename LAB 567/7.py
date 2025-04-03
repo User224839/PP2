@@ -10,8 +10,8 @@ WIDTH, HEIGHT = 400, 400
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mickey Clock")
 
-# Загрузка изображения Микки (замените на путь к вашему изображению)
-mickey = pygame.image.load("mickey.jpeg")
+# Загрузка изображения Микки
+mickey = pygame.image.load("C:\\Users\\Nurdaulet\\Desktop\\PP2\\LAB 567\\mickey.jpeg")
 mickey = pygame.transform.scale(mickey, (WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
@@ -48,4 +48,3 @@ while running:
             running = False
 
 pygame.quit()
-
