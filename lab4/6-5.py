@@ -5,4 +5,4 @@ def write_list_to_file(filename, data_list):
 
 # Sample Usage
 data = ["Hello", "World", "Python"]
-write_list_to_file("output.txt", data)
+write_list_to_file("example.txt", data)

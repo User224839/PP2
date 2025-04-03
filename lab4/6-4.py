@@ -3,5 +3,4 @@ def count_lines(filename):
         lines = file.readlines()
         print(f"Number of lines in {filename}: {len(lines)}")
 
-# Sample Usage
 count_lines("example.txt")

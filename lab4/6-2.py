@@ -7,5 +7,5 @@ def check_access(path):
     print(f"Executable: {os.access(path, os.X_OK)}")
 
 # Sample Usage
-path = "test.txt"
+path = "example.txt"
 check_access(path)
