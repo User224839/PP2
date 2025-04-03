@@ -1,32 +1,51 @@
-
-# ===== Движущийся мяч =====
 import pygame
+import time
+import math
 
+# Инициализация Pygame
 pygame.init()
-screen = pygame.display.set_mode((500, 500))
-pygame.display.set_caption("Moving Ball")
 
-ball_pos = [250, 250]
-ball_radius = 25
-move_step = 20
+# Опции экрана
+WIDTH, HEIGHT = 400, 400
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Mickey Clock")
+
+# Загрузка изображения Микки (замените на путь к вашему изображению)
+mickey = pygame.image.load("mickey.jpeg")
+mickey = pygame.transform.scale(mickey, (WIDTH, HEIGHT))
+clock = pygame.time.Clock()
+
+# Функция для рисования стрелок
+def draw_hand(surface, angle, length, color, width=5):
+    angle_rad = math.radians(angle)
+    x = WIDTH // 2 + length * math.cos(angle_rad)
+    y = HEIGHT // 2 - length * math.sin(angle_rad)
+    pygame.draw.line(surface, color, (WIDTH // 2, HEIGHT // 2), (x, y), width)
+
 running = True
-
 while running:
     screen.fill((255, 255, 255))
-    pygame.draw.circle(screen, (255, 0, 0), ball_pos, ball_radius)
+    screen.blit(mickey, (0, 0))
+
+    # Получаем текущее время
+    current_time = time.localtime()
+    minutes = current_time.tm_min
+    seconds = current_time.tm_sec
+
+    # Вычисляем углы поворота
+    min_angle = 360 - (minutes % 60) * 6
+    sec_angle = 360 - (seconds % 60) * 6
+
+    # Рисуем стрелки
+    draw_hand(screen, min_angle, 80, (0, 0, 255), 6)  # Минутная стрелка (правая рука)
+    draw_hand(screen, sec_angle, 100, (255, 0, 0), 4)  # Секундная стрелка (левая рука)
+
     pygame.display.flip()
+    clock.tick(30)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP and ball_pos[1] - move_step - ball_radius >= 0:
-                ball_pos[1] -= move_step
-            elif event.key == pygame.K_DOWN and ball_pos[1] + move_step + ball_radius <= 500:
-                ball_pos[1] += move_step
-            elif event.key == pygame.K_LEFT and ball_pos[0] - move_step - ball_radius >= 0:
-                ball_pos[0] -= move_step
-            elif event.key == pygame.K_RIGHT and ball_pos[0] + move_step + ball_radius <= 500:
-                ball_pos[0] += move_step
 
 pygame.quit()
+
