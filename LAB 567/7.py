@@ -1,38 +1,32 @@
 
-
-# ===== Музыкальный плеер =====
+# ===== Движущийся мяч =====
 import pygame
 
 pygame.init()
-screen = pygame.display.set_mode((300, 200))
-pygame.display.set_caption("Music Player")
+screen = pygame.display.set_mode((500, 500))
+pygame.display.set_caption("Moving Ball")
 
-# Загрузка музыки
-playlist = ["song1.mp3", "song2.mp3", "song3.mp3"]
-current_track = 0
-pygame.mixer.music.load(playlist[current_track])
-
+ball_pos = [250, 250]
+ball_radius = 25
+move_step = 20
 running = True
+
 while running:
+    screen.fill((255, 255, 255))
+    pygame.draw.circle(screen, (255, 0, 0), ball_pos, ball_radius)
+    pygame.display.flip()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                if pygame.mixer.music.get_busy():
-                    pygame.mixer.music.pause()
-                else:
-                    pygame.mixer.music.unpause()
-            elif event.key == pygame.K_s:
-                pygame.mixer.music.stop()
-            elif event.key == pygame.K_n:
-                current_track = (current_track + 1) % len(playlist)
-                pygame.mixer.music.load(playlist[current_track])
-                pygame.mixer.music.play()
-            elif event.key == pygame.K_p:
-                current_track = (current_track - 1) % len(playlist)
-                pygame.mixer.music.load(playlist[current_track])
-                pygame.mixer.music.play()
+            if event.key == pygame.K_UP and ball_pos[1] - move_step - ball_radius >= 0:
+                ball_pos[1] -= move_step
+            elif event.key == pygame.K_DOWN and ball_pos[1] + move_step + ball_radius <= 500:
+                ball_pos[1] += move_step
+            elif event.key == pygame.K_LEFT and ball_pos[0] - move_step - ball_radius >= 0:
+                ball_pos[0] -= move_step
+            elif event.key == pygame.K_RIGHT and ball_pos[0] + move_step + ball_radius <= 500:
+                ball_pos[0] += move_step
 
 pygame.quit()
-
