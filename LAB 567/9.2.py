@@ -1,174 +1,129 @@
 import pygame
 import random
-import time
 
-# Инициализация Pygame
+# Initialize Pygame
 pygame.init()
 
-# Размеры экрана
-WIDTH, HEIGHT = 640, 480
+# Screen settings
+WIDTH, HEIGHT = 800, 600
+GRID_SIZE = 20
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Snake Game")
 
-# Цвета
+# Colors
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-BLACK = (0, 0, 0)
+BLUE = (0, 0, 255)
 
-# Размеры клеток
-BLOCK_SIZE = 20
-
-# Часы для управления FPS
-clock = pygame.time.Clock()
-
-# Шрифт для отображения счета
-font = pygame.font.SysFont("Arial", 20)
-
-# Класс для еды
-class Food(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.Surface((BLOCK_SIZE, BLOCK_SIZE))
-        self.image.fill(GREEN)
-        self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, (WIDTH - BLOCK_SIZE) // BLOCK_SIZE) * BLOCK_SIZE
-        self.rect.y = random.randint(0, (HEIGHT - BLOCK_SIZE) // BLOCK_SIZE) * BLOCK_SIZE
-        self.weight = random.randint(1, 5)  # Случайный вес пищи
-        self.creation_time = time.time()  # Время создания пищи
-        self.lifetime = 10  # Пища исчезает через 10 секунд
-
-    def update(self):
-        # Проверка, прошло ли достаточно времени (пища исчезает через 10 секунд)
-        if time.time() - self.creation_time > self.lifetime:
-            self.kill()  # Убираем пищу с экрана, если время прошло
-
-# Класс для змеи
+# Snake class
 class Snake:
     def __init__(self):
-        self.body = [(100, 100), (80, 100), (60, 100)]  # Изначально змея длиной 3
-        self.direction = "RIGHT"
-        self.alive = True
-        self.score = 0
+        self.body = [(WIDTH // 2, HEIGHT // 2)]
+        self.direction = (0, -GRID_SIZE)
+        self.growing = 0
+        self.speed = 100  # Snake speed in milliseconds
 
     def move(self):
         head_x, head_y = self.body[0]
-        if self.direction == "UP":
-            head_y -= BLOCK_SIZE
-        elif self.direction == "DOWN":
-            head_y += BLOCK_SIZE
-        elif self.direction == "LEFT":
-            head_x -= BLOCK_SIZE
-        elif self.direction == "RIGHT":
-            head_x += BLOCK_SIZE
+        new_head = (head_x + self.direction[0], head_y + self.direction[1])
 
-        # Добавляем новую голову и удаляем хвост
-        new_head = (head_x, head_y)
-        self.body = [new_head] + self.body[:-1]
+        # Check border collision
+        if (
+            new_head[0] < 0 or new_head[0] >= WIDTH or
+            new_head[1] < 0 or new_head[1] >= HEIGHT or
+            new_head in self.body
+        ):
+            return False  # Game over condition
 
-    def grow(self):
-        # Добавляем новый сегмент к телу змеи
-        tail_x, tail_y = self.body[-1]
-        if self.direction == "UP":
-            tail_y += BLOCK_SIZE
-        elif self.direction == "DOWN":
-            tail_y -= BLOCK_SIZE
-        elif self.direction == "LEFT":
-            tail_x += BLOCK_SIZE
-        elif self.direction == "RIGHT":
-            tail_x -= BLOCK_SIZE
-        self.body.append((tail_x, tail_y))
+        self.body.insert(0, new_head)
 
-    def check_collision(self):
-        head_x, head_y = self.body[0]
+        if self.growing > 0:
+            self.growing -= 1
+        else:
+            self.body.pop()
 
-        # Проверка столкновения с границей экрана
-        if head_x < 0 or head_x >= WIDTH or head_y < 0 or head_y >= HEIGHT:
-            self.alive = False
+        return True
 
-        # Проверка столкновения с телом змеи
-        if (head_x, head_y) in self.body[1:]:
-            self.alive = False
+    def grow(self, size):
+        self.growing += size
 
-    def draw(self, screen):
-        for segment in self.body:
-            pygame.draw.rect(screen, WHITE, pygame.Rect(segment[0], segment[1], BLOCK_SIZE, BLOCK_SIZE))
+    def change_direction(self, new_direction):
+        opposite = (-self.direction[0], -self.direction[1])
+        if new_direction != opposite:  # Prevent moving backward
+            self.direction = new_direction
 
     def get_head_position(self):
         return self.body[0]
 
-# Инициализация
+    def draw(self):
+        for segment in self.body:
+            pygame.draw.rect(screen, GREEN, (segment[0], segment[1], GRID_SIZE, GRID_SIZE))
+
+# Food class
+class Food:
+    def __init__(self):
+        self.respawn()
+
+    def respawn(self):
+        self.position = (
+            random.randint(0, (WIDTH - GRID_SIZE) // GRID_SIZE) * GRID_SIZE,
+            random.randint(0, (HEIGHT - GRID_SIZE) // GRID_SIZE) * GRID_SIZE
+        )
+        self.weight = random.randint(1, 3)  # Food can have weight 1, 2, or 3
+        self.color = RED if self.weight == 1 else BLUE if self.weight == 2 else WHITE
+        self.timer = pygame.time.get_ticks() + random.randint(3000, 7000)  # 3-7 seconds
+
+    def is_expired(self):
+        return pygame.time.get_ticks() > self.timer
+
+    def draw(self):
+        pygame.draw.rect(screen, self.color, (self.position[0], self.position[1], GRID_SIZE, GRID_SIZE))
+
+# Game loop
+clock = pygame.time.Clock()
 snake = Snake()
-foods = pygame.sprite.Group()
-all_sprites = pygame.sprite.Group()
+foods = [Food() for _ in range(3)]  # Multiple foods
 
-# Функция для создания новой еды
-def create_food():
-    food = Food()
-    foods.add(food)
-    all_sprites.add(food)
-
-# Создаем начальную еду
-for _ in range(3):  # Начальное количество пищи
-    create_food()
-
-# Главный игровой цикл
 running = True
 while running:
-    clock.tick(10)  # FPS игры
+    screen.fill((0, 0, 0))
 
-    # Обработка событий
+    # Handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP and snake.direction != "DOWN":
-                snake.direction = "UP"
-            elif event.key == pygame.K_DOWN and snake.direction != "UP":
-                snake.direction = "DOWN"
-            elif event.key == pygame.K_LEFT and snake.direction != "RIGHT":
-                snake.direction = "LEFT"
-            elif event.key == pygame.K_RIGHT and snake.direction != "LEFT":
-                snake.direction = "RIGHT"
+            if event.key == pygame.K_UP:
+                snake.change_direction((0, -GRID_SIZE))
+            elif event.key == pygame.K_DOWN:
+                snake.change_direction((0, GRID_SIZE))
+            elif event.key == pygame.K_LEFT:
+                snake.change_direction((-GRID_SIZE, 0))
+            elif event.key == pygame.K_RIGHT:
+                snake.change_direction((GRID_SIZE, 0))
 
-    # Двигаем змею
-    snake.move()
+    # Move snake
+    if not snake.move():
+        running = False  # Game over
 
-    # Проверка столкновений змеи с едой
-    head_x, head_y = snake.get_head_position()
+    # Check food collision
+    for food in foods:
+        if snake.get_head_position() == food.position:
+            snake.grow(food.weight)
+            food.respawn()
 
-    # Создаем временный спрайт для головы змеи
-    head_sprite = pygame.sprite.Sprite()
-    head_sprite.rect = pygame.Rect(head_x, head_y, BLOCK_SIZE, BLOCK_SIZE)
+    # Remove expired food and replace it
+    for food in foods:
+        if food.is_expired():
+            food.respawn()
 
-    # Проверка столкновения с едой
-    food_hit = pygame.sprite.spritecollideany(head_sprite, foods)
-    if food_hit:
-        snake.grow()  # Змея растет
-        snake.score += food_hit.weight  # Добавляем вес съеденной пищи к счету
-        food_hit.kill()  # Убираем съеденную пищу
-        create_food()  # Генерируем новую еду
+    # Draw everything
+    snake.draw()
+    for food in foods:
+        food.draw()
 
-    # Проверка столкновений с границей или телом змеи
-    snake.check_collision()
-
-    # Отображаем игру
-    screen.fill(BLACK)
-
-    # Отображаем змею
-    snake.draw(screen)
-
-    # Обновляем все спрайты
-    all_sprites.update()
-
-    # Выводим счет
-    score_text = font.render(f"Score: {snake.score}", True, WHITE)
-    screen.blit(score_text, (WIDTH // 2 - score_text.get_width() // 2, 10))
-
-    # Обновляем экран
     pygame.display.flip()
-
-    if not snake.alive:
-        running = False
+    pygame.time.delay(snake.speed)  # Adjust speed based on game mechanics
 
 pygame.quit()
